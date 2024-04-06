@@ -1,0 +1,69 @@
+-- DhvaniVaja
+-- creating database
+create database module4;
+
+use module4;
+
+-- creating table under databse
+create table worker
+(
+worker_id int primary key,
+first_name varchar(50) not null,
+last_name varchar(50) not null,
+salary int, 
+joining_date datetime,
+department varchar(11)
+);
+
+-- insert records into table
+insert into worker values
+(1,'Monika','Arora', 100000,'2014-2-20 09:00:00', 'HR'),
+('2', 'Niharika', 'Verma', '80000', '2014-6-11 09:00:00', 'Admin'),
+('3', 'Vishal', 'Singhal', '300000', '2014-2-20 09:00:00', 'HR'),
+('4', 'Amitabh', 'Singh', '500000', '2014-2-20 09:00:00', 'Admin'),
+('5', 'Vivek ', 'Bhati', '500000', '2014-6-11 09:00:00', 'Admin'),
+('6', 'Vipul', 'Diwan', '200000', '2014-6-11 09:00:00', 'Account'),
+('7', 'Satish', 'Kumar', '75000', '2014-1-20 09:00:00', 'Account'),
+('8', 'Geetika ', 'Chauhan', '90000', '2014-4-11 09:00:00', 'Admin');
+
+
+-- Assessment
+
+-- 1. Write an SQL query to print all Worker details from the Worker table order by FIRST_NAME Ascending and DEPARTMENT Descending.
+select * from worker
+order by first_name asc, department desc;
+
+-- 2.Write an SQL query to print details for Workers with the first names “Vipul” and “Satish” from the Worker table.
+select * from worker
+where first_name in ('Vipul','Satish');
+
+-- 3. Write an SQL query to print details of the Workers whose FIRST_NAME ends with ‘h’ and contains six alphabets.
+select * from worker where first_name like '_____h'; 
+
+-- 4. Write an SQL query to print details of the Workers whose SALARY lies between 1.
+select * from worker
+where salary between 50000 and 150000;
+
+-- 5. Write an SQL query to fetch duplicate records having matching data in some fields of a table.
+select Worker_Id, count(worker_id) from worker
+group by worker_id
+having (worker_id) >= 1;
+
+
+-- 6. Write an SQL query to show the top 6 records of a table.
+select * from worker
+order by worker_id limit 6;
+
+-- 7. Write an SQL query to fetch the departments that have less than five people in them.
+select Department, count(worker_id) as NumberOfPeople from worker
+group by department 
+having count(worker_id) <5;
+
+
+-- 8. Write an SQL query to show all departments along with the number of people in there.
+select Department, count(worker_id) as NumberOfPeople from worker
+group by department;
+
+-- 9. Write an SQL query to print the name of employees having the highest salary in each department.
+select Department, max(salary) as HighestSalary from worker
+group by department;
